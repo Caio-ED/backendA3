@@ -1,7 +1,12 @@
 const { response } = require("express");
 const express = require("express");
 const app = express();
+const rotasPaciente = require("./paciente");
+
 app.use(express.json())
+
+app.use('/pacientes', rotasPaciente)
+
 contador = 0;
 
 const usuarios = [];
