@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
+
 contador = 0;
-
-
-router.use(express.json())
+const pacientes = [];
 
 router.get('/pacientes', (req, res) => {
-    res.status(200).json;
+    res.status(200).json(pacientes);
 })
 
-const pacientes = [];
 
 router.post('/cadastro', (req, res) => {
     const {
