@@ -4,8 +4,8 @@ app.use(express.json())
 
 const rotasPaciente = require("./paciente");
 
-app.use('/', rotasPaciente)
+app.use('/pacientes', rotasPaciente)
 
-app.listen(4000, () => {
+app.listen(3000, () => {
     console.log("servidor subiu...")
 })
