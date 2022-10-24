@@ -7,5 +7,5 @@ const rotasUsuario = require("./usuario")
 app.use('/usuarios', rotasUsuario)
 
 app.listen(4000, () => {
-    console.log("servidor subiu...")
+    console.log("Usuarios - MSS: 4000")
 })
