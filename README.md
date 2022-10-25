@@ -1,9 +1,13 @@
 # Back End - Arquitetura de Microsserviços
-CRUD - MSS
 
-...
+## Componentes:
+- Barramento de Eventos
+- MSS Usuarios
+- MSS Pacientes
+- MSS Prontuarios
+- MSS Chat
 
-## Integrantes
+## Integrantes:
 
 ```
 Caio Emidio Daniel RA:821136207
