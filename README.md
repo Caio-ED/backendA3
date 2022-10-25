@@ -1,7 +1,7 @@
 # Back End - Arquitetura de Microsserviços
 
 ## Indice:
-- [Componentes](#componentes)
+- [Microsserviços](#componentes)
 - [Integrantes](#integrantes)
 - [Instalação](#instalacao)
 
@@ -33,17 +33,18 @@ Vladmir Neres de Oliveira RA:821142637
 ```
 <a id="instalacao"></a>
 ## Instalação
-1. Clone o Projeto em um diretorio de sua preferência
-2. Abra um terminar do VSCode ou o git bash, para cada um dos [componentes](#componentes)
-3. Entre em cada Terminal e vincule a pasta de seu componente com:
+1. Clone o Projeto em um diretorio de sua preferência.
+2. Abra um terminar do VSCode ou o git bash, para cada um dos [microsserviços](#componentes).
+3. Entre em cada Terminal e vincule a pasta de seu respectivo microsserviço com:
 ```
- cd <pasta-do-componente>
+ cd <pasta-do-microsserviço>
 ```
-4. Instale as Dependências de Cada um dele com:
+4. Instale as dependências de cada um dos microsserviços com:
 ```
 npm install
 ```
-5. Rode o componente com:
+5. Inicie o Microsserviço com:
 ```
 npm start
 ```
+6. Agora é só fazer as requisições!
