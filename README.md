@@ -33,5 +33,17 @@ Vladmir Neres de Oliveira RA:821142637
 ```
 <a id="instalacao"></a>
 ## Instalação
-1. Selecione um diretorio para clonar o Projeto
-2. 
+1. Clone o Projeto em um diretorio de sua preferência
+2. Abra um terminar do VSCode ou o git bash, para cada um dos [componentes](#componentes)
+3. Entre em cada Terminal e vincule a pasta de seu componente com:
+```
+ cd <pasta-do-componente>
+```
+4. Instale as Dependências de Cada um dele com:
+```
+npm install
+```
+5. Rode o componente com:
+```
+npm start
+```
