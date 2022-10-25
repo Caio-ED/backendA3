@@ -1,9 +1,9 @@
 # Back End - Arquitetura de Microsserviços
 
 ## Indice:
-[Componentes] (#componentes)
-[Integrantes](#integrantes)
-[Instalação](#instalacao)
+- [Componentes](#componentes)
+- [Integrantes](#integrantes)
+- [Instalação](#instalacao)
 
 <a id="componentes"></a>
 ## Componentes:
