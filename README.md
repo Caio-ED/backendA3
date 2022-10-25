@@ -33,3 +33,5 @@ Vladmir Neres de Oliveira RA:821142637
 ```
 <a id="instalacao"></a>
 ## Instalação
+1. Selecione um diretorio para clonar o Projeto
+2. 
