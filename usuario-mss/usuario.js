@@ -35,21 +35,25 @@ router.post("", async (req, res) => {
     });
 })
 
-router.get("/login", async (req, res) => {
-
-    const { email, senha } = req.query
+router.post("/login", async (req, res) => {
+console.log('bateu');
+    const { email, senha } = req.body
     const user = usuarios.find(user => { return user.email == email && user.senha == senha })
 
     if (user) {
-        await axios.post('http://localhost:10000/eventos', {
-            tipoEvento: 'usuarioLogado',
-            dados: user
-        });
-        return res.status(200).json(user)
+        res.status(200).json(user)
+        try {
+            await axios.post('http://localhost:10000/eventos', {
+                tipoEvento: 'usuarioLogado',
+                dados: user
+            });
+        } catch (error) {
+            console.log(error);
+        }
+        
+    } else {
+        return res.status(404).json({message: 'Usuario não foi encontrado!'});
     }
-
-    return res.status(401).end();
-
 });
 // - testar: localhost:4000/usuarios/login?email=dev@root.com&senha=123456
 
