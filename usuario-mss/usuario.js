@@ -10,7 +10,7 @@ const usuarios = [
         "nome": "Desenvolvimento",
         "cpf": "000.000.000-00",
         "email": "dev@root.com",
-        "senha": "123456",
+        "senha": "devroot",
         "tipoAcesso": "root"
     }
 ];
@@ -36,12 +36,13 @@ router.post("", async (req, res) => {
 })
 
 router.post("/login", async (req, res) => {
-console.log('bateu');
+
     const { email, senha } = req.body
     const user = usuarios.find(user => { return user.email == email && user.senha == senha })
 
     if (user) {
-        res.status(200).json(user)
+
+        res.status(200).json({...user, msg: "usuario logado", auth: true})
         try {
             await axios.post('http://localhost:10000/eventos', {
                 tipoEvento: 'usuarioLogado',
@@ -52,7 +53,7 @@ console.log('bateu');
         }
         
     } else {
-        return res.status(404).json({message: 'Usuario não foi encontrado!'});
+        return res.status(404).json({msg: 'Usuario não foi encontrado!', auth: false});
     }
 });
 // - testar: localhost:4000/usuarios/login?email=dev@root.com&senha=123456
