@@ -54,7 +54,7 @@ console.log('bateu');
         }
         
     } else {
-        return res.status(404).json({message: 'Usuario não foi encontrado!'});
+        return res.status(404).json({msg: 'Usuario não foi encontrado!', auth: false});
     }
 });
 // - testar: localhost:4000/usuarios/login?email=dev@root.com&senha=123456
