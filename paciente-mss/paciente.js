@@ -9,7 +9,13 @@ const pacientes = [
         cpf: "000.000.000-01",
         telefone: "11 9000-0001",
         entradaClinica: "01/01/2021",
-        endereco: "Rua canjas de Galinhas"
+        cep: "00000-000",
+        rua: "tal",
+        numero: "32",
+        complemento: "tal",
+        bairro: "tal",
+        estado: "tal",
+        cidade: "tal"
       }
 ];
 
@@ -19,12 +25,16 @@ router.post('/cadastro', (req, res) => {
         nome,
         dataNascimento,
         cpf,
-        telefone,
-        entradaClinica,
-        endereco
+        cep,
+        rua,
+        numero,
+        complemento,
+        bairro,
+        estado,
+        cidade,
     } = req.body;
 
-    pacientes.push({ nome, dataNascimento, cpf, telefone, entradaClinica, endereco })
+    pacientes.push({ nome, dataNascimento, cpf, cep, rua, numero, complemento, bairro, estado, cidade })
     res.status(200).json(pacientes[contador]);
     contador++;
 });
@@ -34,10 +44,15 @@ router.get('/pesquisa', (req, res) => {
     const {
         nome,
         dataNascimento,
-        cpf,
-        telefone,
-        entradaClinica,
-        endereco
+        cpf,   
+        cep,
+        rua,
+        numero,
+        complemento,
+        bairro,
+        estado,
+        cidade
+
     } = req.query;
     
     let filtros = []
@@ -45,9 +60,12 @@ router.get('/pesquisa', (req, res) => {
     if (nome) filtros.push('nome');
     if (dataNascimento) filtros.push('dataNascimento');
     if (cpf) filtros.push('cpf');
-    if (telefone) filtros.push('telefone');
-    if (entradaClinica) filtros.push('entradaClinica');
-    if (endereco) filtros.push('endereco');
+    if (cep) filtros.push('cep');
+    if (rua) filtros.push('rua');
+    if (numero) filtros.push(complemento);
+    if (bairro) filtros.push(bairro);
+    if (estado) filtros.push(cidade);
+
 
     const paciente = pacientes.find(pac => {
         return filtros.every((valor) => {return req.query[valor] == pac[valor]});
@@ -66,9 +84,13 @@ router.put('/alterar-cadastro', (req, res) => {
         nome,
         dataNascimento,
         cpf,
-        telefone,
-        entradaClinica,
-        endereco
+        cep,
+        rua,
+        numero,
+        complemento,
+        bairro,
+        estado,
+        cidade
     } = req.body;
 
     const paciente = pacientes.find((paciente) => { return paciente.cpf == cpf });
@@ -76,9 +98,13 @@ router.put('/alterar-cadastro', (req, res) => {
     paciente.nome = nome
     paciente.dataNascimento = dataNascimento
     paciente.cpf = cpf
-    paciente.telefone = telefone
-    paciente.entradaClinica = entradaClinica
-    paciente.endereco = endereco
+    paciente.cep = cep
+    paciente.rua = rua
+    paciente.numero = numero
+    paciente.complemento = complemento
+    paciente.bairro = bairro
+    paciente.estado = estado
+    paciente.cidade = cidade
 
     res.status(204).end();
 })
