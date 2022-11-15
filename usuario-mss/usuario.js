@@ -9,11 +9,10 @@ const usuarios = [
     {
         "nomeFuncionario": "Desenvolvimento",
         "cpfFuncionario": "000.000.000-00",
-        "emailFuncionario": "dev@root.com",
-        "passwordFuncionario": "123456",
-        "confirmPasswordFuncionario": "123456",
+        "emailFuncionario": "admin",
+        "passwordFuncionario": "admin",
         "tipoAcesso": "root"
-    }
+    },
 ];
 
 router.post("", async (req, res) => {
@@ -22,28 +21,33 @@ router.post("", async (req, res) => {
         cpfFuncionario,
         emailFuncionario,
         passwordFuncionario,
-        confirmPasswordFuncionario,
         tipoAcesso
     } = req.body;
-    usuarios.push({ nomeFuncionario, cpfFuncionario, emailFuncionario, passwordFuncionario, confirmPasswordFuncionario, tipoAcesso })
+    
+    usuarios.push({ nomeFuncionario, cpfFuncionario, emailFuncionario, passwordFuncionario, tipoAcesso })
     res.status(201).json(usuarios[contador]);
     contador++;
 
-    await axios.post('http://localhost:10000/eventos', {
-        tipoEvento: 'usuarioCadastrado',
-        dados: {
-            user: req.body
-        }
-    });
-})
+    try{
+        await axios.post('http://localhost:10000/eventos', {
+            tipoEvento: 'usuarioCadastrado',
+            dados: {
+                user: req.body
+            }
+        });
+    }
+    catch(e){
+        console.log('erro aqui no barramento', e);
+    }
+    })
 
 router.post("/login", async (req, res) => {
 console.log('bateu');
     const { emailFuncionario, passwordFuncionario } = req.body
-    const user = usuarios.find(user => { return user.emailFuncionario == emailFuncionario && user.passwordFuncionario == passwordFuncionario })
+    const user = usuarios.find(user => { return user.emailFuncionario.toUpperCase() == emailFuncionario.toUpperCase() && user.passwordFuncionario == passwordFuncionario })
 
     if (user) {
-        res.status(200).json(user)
+        res.status(200).json({...user, msg: "usuario logado", auth: true})
         try {
             await axios.post('http://localhost:10000/eventos', {
                 tipoEvento: 'usuarioLogado',
@@ -65,16 +69,15 @@ router.put('', async (req, res) => {
         cpfFuncionario,
         emailFuncionario,
         passwordFuncionario,
-        confirmPasswordFuncionario,
         tipoAcesso
     } = req.body;
+    
     const user = usuarios.find((user) => { return user.cpf == cpf });
 
-    user.nomeFuncionario = nomeFuncionario
+    user.nome = nomeFuncionario
     user.cpfFuncionario = cpfFuncionario
     user.emailFuncionario = emailFuncionario
     user.passwordFuncionario = passwordFuncionario
-    user.confirmPasswordFuncionario = confirmPasswordFuncionario
     user.tipoAcesso = tipoAcesso
 
     await axios.post('http://localhost:10000/eventos', {

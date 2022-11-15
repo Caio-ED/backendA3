@@ -36,23 +36,23 @@ router.get('/pesquisa', (req, res) => {
     return res.status(404).end();
 });
 
-router.put('/alterar-prontuario', (req, res) => {
+// router.put('/alterar-prontuario', (req, res) => {
 
-    const {
-        campo
-    } = req.body;
+//     const {
+//         campo
+//     } = req.body;
 
-    const paciente = prontuarios.find((prontuario) => { return prontuario.id_prontuario == id_prontuario });
+//     const paciente = prontuarios.find((prontuario) => { return prontuario.id_prontuario == id_prontuario });
 
-    paciente.campo = campo
+//     paciente.campo = campo
 
-    res.status(204).end();
-})
+//     res.status(204).end();
+// })
 
-router.delete('/excluir-prontuario', (req, res) => {
-    const id_prontuario = req.body.id_prontuario
-    prontuarios.splice(prontuarios.find((prontuario, i) => { if (prontuario.id_prontuario == id_prontuario) return i }), 1)
-    res.status(204).end()
-})
+// router.delete('/excluir-prontuario', (req, res) => {
+//     const id_prontuario = req.body.id_prontuario
+//     prontuarios.splice(prontuarios.find((prontuario, i) => { if (prontuario.id_prontuario == id_prontuario) return i }), 1)
+//     res.status(204).end()
+// })
 
 module.exports = router;
