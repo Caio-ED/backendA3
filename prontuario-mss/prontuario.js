@@ -2,15 +2,30 @@ const express = require('express');
 const router = express.Router();
 
 contador = 0;
-const prontuarios = [];
+const prontuarios = [
+    {
+        nomeProntuario: "Teste",
+        inicioTratamento: "01/01/2021",
+        tipoDoenca: "Esquisofrênia",
+        gravidade: "alta",
+        medicamento: "tarja preta",
+        observacoes: "uma observacao feita pelo doutor",
+    }
+];
 
 router.post('/cadastro', (req, res) => {
 
     const {
-        campo
+        nomeProntuario,
+        inicioTratamento,
+        tipoDoenca,
+        gravidade,
+        medicamento,
+        observacoes,
     } = req.body;
 
-    prontuarios.push({campo})
+    prontuarios.push({ nomeProntuario, inicioTratamento, tipoDoenca, gravidade, medicamento, observacoes });
+    prontuario[contador].idProntuario = contador;
     res.status(200).json(prontuarios[contador]);
     contador++;
 });
@@ -18,41 +33,64 @@ router.post('/cadastro', (req, res) => {
 router.get('/pesquisa', (req, res) => {
 
     const {
-        campo
+        idProntuario,
+        nomeProntuario,
+        inicioTratamento,
+        tipoDoenca,
+        gravidade,
+        medicamento,
+        observacoes,
     } = req.query;
-    
+
     let filtros = []
-    
-    if (campo) filtros.push('campo');
-    
+
+    if (nomeProntuario) filtros.push('nomeProntuario');
+    if (inicioTratamento) filtros.push('inicioTratamento');
+    if (tipoDoenca) filtros.push('tipoDoenca');
+    if (gravidade) filtros.push('gravidade');
+    if (medicamento) filtros.push('medicamento');
+    if (observacoes) filtros.push('observacoes');
+    if (idProntuario) filtros.push('idProntuario');
+
 
     const prontuario = prontuarios.find(pront => {
-        return filtros.every((valor) => {return req.query[valor] == pront[valor]});
+        return filtros.every((valor) => { return req.query[valor] == pront[valor] });
     });
 
     if (prontuario) {
-        return res.status(200).json(prontuario)
+        return res.status(200).json(prontuario);
     }
     return res.status(404).end();
 });
 
-// router.put('/alterar-prontuario', (req, res) => {
+router.put('/alterar-prontuario', (req, res) => {
 
-//     const {
-//         campo
-//     } = req.body;
+    const {
+        idProntuario,
+        nomeProntuario,
+        inicioTratamento,
+        tipoDoenca,
+        gravidade,
+        medicamento,
+        observacoes,
+    } = req.body;
 
-//     const paciente = prontuarios.find((prontuario) => { return prontuario.id_prontuario == id_prontuario });
+    const paciente = prontuarios.find((prontuario) => { return prontuario.idProntuario == idProntuario });
 
-//     paciente.campo = campo
+    paciente.nomeProntuario = nomeProntuario;
+    paciente.inicioTratamento = inicioTratamento;
+    paciente.tipoDoenca = tipoDoenca;
+    paciente.gravidade = gravidade;
+    paciente.medicamento = medicamento;
+    paciente.observacoes = observacoes;
 
-//     res.status(204).end();
-// })
+    res.status(204).end();
+})
 
-// router.delete('/excluir-prontuario', (req, res) => {
-//     const id_prontuario = req.body.id_prontuario
-//     prontuarios.splice(prontuarios.find((prontuario, i) => { if (prontuario.id_prontuario == id_prontuario) return i }), 1)
-//     res.status(204).end()
-// })
+router.delete('/excluir-prontuario', (req, res) => {
+    const idProntuario = req.body.idProntuario
+    prontuarios.splice(prontuarios.find((prontuario, i) => { if (prontuario.idProntuario == idProntuario) return i }), 1)
+    res.status(204).end()
+})
 
 module.exports = router;
