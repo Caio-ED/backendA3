@@ -13,7 +13,7 @@ const prontuarios = [
     }
 ];
 
-router.post('/cadastro', (req, res) => {
+router.post('/cadastro', async (req, res) => {
 
     const {
         nomeProntuario,
@@ -28,6 +28,7 @@ router.post('/cadastro', (req, res) => {
     prontuario[contador].idProntuario = contador;
     res.status(200).json(prontuarios[contador]);
     contador++;
+
 });
 
 router.get('/pesquisa', (req, res) => {

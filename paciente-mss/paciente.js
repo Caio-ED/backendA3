@@ -19,7 +19,7 @@ const pacientes = [
       }
 ];
 
-router.post('/cadastro', (req, res) => {
+router.post('/cadastro', async (req, res) => {
 
     const {
         nome,
