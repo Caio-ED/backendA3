@@ -62,9 +62,11 @@ router.get('/pesquisa', (req, res) => {
     if (cpf) filtros.push('cpf');
     if (cep) filtros.push('cep');
     if (rua) filtros.push('rua');
-    if (numero) filtros.push(complemento);
-    if (bairro) filtros.push(bairro);
-    if (estado) filtros.push(cidade);
+    if (numero) filtros.push('numero');
+    if (complemento) filtros.push('complemento');
+    if (bairro) filtros.push('bairro');
+    if (estado) filtros.push('estado');
+    if (cidade) filtros.push('cidade');
 
 
     const paciente = pacientes.find(pac => {
