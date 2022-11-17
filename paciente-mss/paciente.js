@@ -7,6 +7,7 @@ const pacientes = [
         nome: "Paciente00",
         dataNascimento: "01/01/2001",
         cpf: "000.000.000-01",
+        email: "paciente01@gmail.com",
         telefone: "11 9000-0001",
         entradaClinica: "01/01/2021",
         cep: "00000-000",
@@ -25,6 +26,7 @@ router.post('/cadastro', async (req, res) => {
         nome,
         dataNascimento,
         cpf,
+        email,
         cep,
         rua,
         numero,
@@ -34,7 +36,7 @@ router.post('/cadastro', async (req, res) => {
         cidade,
     } = req.body;
 
-    pacientes.push({ nome, dataNascimento, cpf, cep, rua, numero, complemento, bairro, estado, cidade })
+    pacientes.push({ nome, dataNascimento, cpf, email, cep, rua, numero, complemento, bairro, estado, cidade })
     res.status(200).json(pacientes[contador]);
     contador++;
 });
@@ -45,6 +47,7 @@ router.get('/pesquisa', (req, res) => {
         nome,
         dataNascimento,
         cpf,   
+        email,
         cep,
         rua,
         numero,
@@ -60,6 +63,7 @@ router.get('/pesquisa', (req, res) => {
     if (nome) filtros.push('nome');
     if (dataNascimento) filtros.push('dataNascimento');
     if (cpf) filtros.push('cpf');
+    if (email) filtros.push('email');
     if (cep) filtros.push('cep');
     if (rua) filtros.push('rua');
     if (numero) filtros.push('numero');
@@ -86,6 +90,7 @@ router.put('/alterar-cadastro', (req, res) => {
         nome,
         dataNascimento,
         cpf,
+        email,
         cep,
         rua,
         numero,
@@ -100,6 +105,7 @@ router.put('/alterar-cadastro', (req, res) => {
     paciente.nome = nome
     paciente.dataNascimento = dataNascimento
     paciente.cpf = cpf
+    paciente.email = email
     paciente.cep = cep
     paciente.rua = rua
     paciente.numero = numero
