@@ -25,7 +25,8 @@ router.post('/cadastro', async (req, res) => {
     } = req.body;
 
     prontuarios.push({ nomeProntuario, inicioTratamento, tipoDoenca, gravidade, medicamento, observacoes });
-    prontuario[contador].idProntuario = contador;
+    prontuarios[contador].idProntuario = contador;
+    console.log('prontuario Cadastrado: ',prontuarios[contador]);
     res.status(200).json(prontuarios[contador]);
     contador++;
 
@@ -54,7 +55,7 @@ router.get('/pesquisa', (req, res) => {
     if (idProntuario) filtros.push('idProntuario');
 
 
-    const prontuario = prontuarios.find(pront => {
+    const prontuario = prontuarios.filter(pront => {
         return filtros.every((valor) => { return req.query[valor] == pront[valor] });
     });
 
