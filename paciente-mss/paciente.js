@@ -69,7 +69,7 @@ router.get('/pesquisa', (req, res) => {
     if (cidade) filtros.push('cidade');
 
 
-    const paciente = pacientes.find(pac => {
+    const paciente = pacientes.filter(pac => {
         return filtros.every((valor) => {return req.query[valor] == pac[valor]});
     });
 
