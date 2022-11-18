@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-contador = 0;
+contador = 1;
 const prontuarios = [
     {
-        nomeProntuario: "Teste",
+        cpfProntuario: "Teste",
         inicioTratamento: "01/01/2021",
-        tipoDoenca: "Esquisofrênia",
+        tipoDoenca: "Esquizofrênia",
         gravidade: "alta",
         medicamento: "tarja preta",
         observacoes: "uma observacao feita pelo doutor",
@@ -16,7 +16,7 @@ const prontuarios = [
 router.post('/cadastro', async (req, res) => {
 
     const {
-        nomeProntuario,
+        cpfProntuario,
         inicioTratamento,
         tipoDoenca,
         gravidade,
@@ -24,7 +24,7 @@ router.post('/cadastro', async (req, res) => {
         observacoes,
     } = req.body;
 
-    prontuarios.push({ nomeProntuario, inicioTratamento, tipoDoenca, gravidade, medicamento, observacoes });
+    prontuarios.push({ cpfProntuario, inicioTratamento, tipoDoenca, gravidade, medicamento, observacoes });
     prontuarios[contador].idProntuario = contador;
     console.log('prontuario Cadastrado: ',prontuarios[contador]);
     res.status(200).json(prontuarios[contador]);
@@ -36,24 +36,24 @@ router.get('/pesquisa', (req, res) => {
 
     const {
         idProntuario,
-        nomeProntuario,
+        cpfProntuario,
         inicioTratamento,
         tipoDoenca,
         gravidade,
         medicamento,
         observacoes,
+    
     } = req.query;
 
     let filtros = []
 
-    if (nomeProntuario) filtros.push('nomeProntuario');
+    if (cpfProntuario) filtros.push('cpfProntuario');
     if (inicioTratamento) filtros.push('inicioTratamento');
     if (tipoDoenca) filtros.push('tipoDoenca');
     if (gravidade) filtros.push('gravidade');
     if (medicamento) filtros.push('medicamento');
     if (observacoes) filtros.push('observacoes');
     if (idProntuario) filtros.push('idProntuario');
-
 
     const prontuario = prontuarios.filter(pront => {
         return filtros.every((valor) => { return req.query[valor] == pront[valor] });
@@ -69,7 +69,7 @@ router.put('/alterar-prontuario', (req, res) => {
 
     const {
         idProntuario,
-        nomeProntuario,
+        cpfProntuario,
         inicioTratamento,
         tipoDoenca,
         gravidade,
@@ -79,7 +79,7 @@ router.put('/alterar-prontuario', (req, res) => {
 
     const paciente = prontuarios.find((prontuario) => { return prontuario.idProntuario == idProntuario });
 
-    paciente.nomeProntuario = nomeProntuario;
+    paciente.cpfProntuario = cpfProntuario;
     paciente.inicioTratamento = inicioTratamento;
     paciente.tipoDoenca = tipoDoenca;
     paciente.gravidade = gravidade;
